@@ -1,94 +1,184 @@
 ---
-title:AW  Billing  API Reference
+title: AW  Billing  API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - php
-  - html 
+  - php: Force(php)
+  - html: External(html)
+
 toc_footers:
-  - <a href='#'>Current Billing Repo</a>
-  - <a href='https://github.com/advisorwebsites/d8platform/tree/master/modules/custom/aw_billing'>d8platform/modules/custom/aw_billing</a>
+  - <a href='https://github.com/advisorwebsites/d8platform/tree/master/modules/custom/aw_billing'>aw_billing Module</a>
 
 includes:
   - errors
 
-search: true
+search: false
 ---
 
 # Introduction
 
+ Draft Outline of Billing API extrapolated from curren aw_billing module
 
 
+# Subscriptions
 
-# Authentication
+## Get Currency
+> Get Currency 
 
-> To authorize, use this code:
+```php
+	
+	getCurrency('$country')
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
 ```
 
-```python
-import kittn
+```html
+	
+	get api request returns currency type
 
-api = kittn.authorize('meowmeowmeow')
+```
+ Returns Currency Type
+
+
+
+## Update Subscription
+
+> Update Subscription
+
+```php
+	updateSubscription($current, $subscr_params,$billing_details)
+
 ```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+```html
+
 ```
 
-```javascript
-const kittn = require('kittn');
 
-let api = kittn.authorize('meowmeowmeow');
+
+## Add Addon to Subscription
+
+> Add Addon to Subscription
+
+```php
+	
+	addAddonToSubscription($site_id, $addon_name, $number = 1)
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+```html
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+```
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+## Create Subscription
 
-`Authorization: meowmeowmeow`
+> Create Subscriptions
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+```php
 
-# Kittens
+	createSubscription('Subscription Details')
+
+```
+
+```html
+
+```
+
+## Sync Plan
+
+> Sync Plan
+
+```php
+
+  syncPlan(PlanDetailsInterface $plan_details, PlanInterface $plan)
+
+```
+
+```html
+```
+
+## Charge Setup Fee
+
+Transaction for one-time setup/onboarding.
+
+> Charge Setup Fee
+
+```php
+  
+  chargeSetupFee($setup_fee, $account, $subscription)
+  
+```
+```html
+```
+
+## Charge Prorated Addon Amount
+
+Executes prorated charge on account
+
+> Charge Prorated Addon Amount
+```php
+
+  chargeProratedAddonAmount($amount, $account, $subscription)
+
+```
+
+```html
+```
+
+## Update From Plan Details
+
+> Updates plan details from external.
+
+```php
+
+  updateFromPlanDetails(PlanDetailsInterface $plan_details)
+```
+
+```html
+```
+
+## Cancel Subscription
+
+> Cancel Subscription
+
+```php
+
+  cancelSubscription($subscr_id)
+
+```
+
+```html
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Slate Examples
 
 ## Get All Kittens
 
-```ruby
+```php
 require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
 api.kittens.get
 ```
 
-```python
+```html
 import kittn
 
 api = kittn.authorize('meowmeowmeow')
 api.kittens.get()
 ```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
 > The above command returns JSON structured like this:
 
 ```json
@@ -129,32 +219,19 @@ Remember — a happy kitten is an authenticated kitten!
 
 ## Get a Specific Kitten
 
-```ruby
+```php
 require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
 api.kittens.get(2)
 ```
 
-```python
+```html
 import kittn
 
 api = kittn.authorize('meowmeowmeow')
 api.kittens.get(2)
 ```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
 > The above command returns JSON structured like this:
 
 ```json
@@ -183,34 +260,19 @@ ID | The ID of the kitten to retrieve
 
 ## Delete a Specific Kitten
 
-```ruby
+```php
 require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
 api.kittens.delete(2)
 ```
 
-```python
+```html
 import kittn
 
 api = kittn.authorize('meowmeowmeow')
 api.kittens.delete(2)
 ```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
 
 ```json
 {
