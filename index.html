@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Documentation</title>
+    <title>AW  Billing  API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all_nosearch.js"></script>
   </head>
 
-  <body class="index" data-languages="[]">
+  <body class="index" data-languages="[&quot;php&quot;,&quot;html&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,15 +210,48 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="php">Force(php)</a>
+              <a href="#" data-language-name="html">External(html)</a>
+        </div>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#subscriptions" class="toc-h1 toc-link" data-title="Subscriptions">Subscriptions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-currency" class="toc-h2 toc-link" data-title="Get Currency">Get Currency</a>
+                  </li>
+                  <li>
+                    <a href="#update-subscription" class="toc-h2 toc-link" data-title="Update Subscription">Update Subscription</a>
+                  </li>
+                  <li>
+                    <a href="#add-addon-to-subscription" class="toc-h2 toc-link" data-title="Add Addon to Subscription">Add Addon to Subscription</a>
+                  </li>
+                  <li>
+                    <a href="#create-subscription" class="toc-h2 toc-link" data-title="Create Subscription">Create Subscription</a>
+                  </li>
+                  <li>
+                    <a href="#sync-plan" class="toc-h2 toc-link" data-title="Sync Plan">Sync Plan</a>
+                  </li>
+                  <li>
+                    <a href="#charge-setup-fee" class="toc-h2 toc-link" data-title="Charge Setup Fee">Charge Setup Fee</a>
+                  </li>
+                  <li>
+                    <a href="#charge-prorated-addon-amount" class="toc-h2 toc-link" data-title="Charge Prorated Addon Amount">Charge Prorated Addon Amount</a>
+                  </li>
+                  <li>
+                    <a href="#update-from-plan-details" class="toc-h2 toc-link" data-title="Update From Plan Details">Update From Plan Details</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-subscription" class="toc-h2 toc-link" data-title="Cancel Subscription">Cancel Subscription</a>
+                  </li>
+              </ul>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#slate-examples" class="toc-h1 toc-link" data-title="Slate Examples">Slate Examples</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
@@ -231,55 +264,101 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#slate-examples-errors" class="toc-h1 toc-link" data-title="Slate Examples (Errors)">Slate Examples (Errors)</a>
+          </li>
       </ul>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/advisorwebsites/d8platform/tree/master/modules/custom/aw_billing'>aw_billing Module</a></li>
+        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1><h1 id='authentication'>Authentication</h1>
+        <h1 id='introduction'>Introduction</h1>
+<p>Draft Outline of Billing API extrapolated from curren aw_billing module</p>
+<h1 id='subscriptions'>Subscriptions</h1><h2 id='get-currency'>Get Currency</h2>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Get Currency </p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight php tab-php"><code>
+    getCurrency('$country')
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+</code></pre><pre class="highlight html tab-html"><code>
+    get api request returns currency type
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
 </code></pre>
+<p>Returns Currency Type</p>
+<h2 id='update-subscription'>Update Subscription</h2>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Update Subscription</p>
+</blockquote>
+<pre class="highlight php tab-php"><code>    updateSubscription($current, $subscr_params,$billing_details)
+
+</code></pre><pre class="highlight html tab-html"><code>
+</code></pre><h2 id='add-addon-to-subscription'>Add Addon to Subscription</h2>
+<blockquote>
+<p>Add Addon to Subscription</p>
+</blockquote>
+<pre class="highlight php tab-php"><code>
+    addAddonToSubscription($site_id, $addon_name, $number = 1)
+</code></pre><pre class="highlight html tab-html"><code>
+</code></pre><h2 id='create-subscription'>Create Subscription</h2>
+<blockquote>
+<p>Create Subscriptions</p>
+</blockquote>
+<pre class="highlight php tab-php"><code>
+    createSubscription('Subscription Details')
+
+</code></pre><pre class="highlight html tab-html"><code>
+</code></pre><h2 id='sync-plan'>Sync Plan</h2>
+<blockquote>
+<p>Sync Plan</p>
+</blockquote>
+<pre class="highlight php tab-php"><code>
+  syncPlan(PlanDetailsInterface $plan_details, PlanInterface $plan)
+
+</code></pre><pre class="highlight html tab-html"><code></code></pre><h2 id='charge-setup-fee'>Charge Setup Fee</h2>
+<p>Transaction for one-time setup/onboarding.</p>
+
+<blockquote>
+<p>Charge Setup Fee</p>
+</blockquote>
+<pre class="highlight php tab-php"><code>
+  chargeSetupFee($setup_fee, $account, $subscription)
+
+</code></pre><pre class="highlight html tab-html"><code></code></pre><h2 id='charge-prorated-addon-amount'>Charge Prorated Addon Amount</h2>
+<p>Executes prorated charge on account</p>
+
+<blockquote>
+<p>Charge Prorated Addon Amount
+```php</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>chargeProratedAddonAmount($amount, $account, $subscription)</p>
+<pre class="highlight plaintext"><code>
+```html
+</code></pre><h2 id='update-from-plan-details'>Update From Plan Details</h2>
+<blockquote>
+<p>Updates plan details from external.</p>
+</blockquote>
+<pre class="highlight php tab-php"><code>
+  updateFromPlanDetails(PlanDetailsInterface $plan_details)
+</code></pre><pre class="highlight html tab-html"><code></code></pre><h2 id='cancel-subscription'>Cancel Subscription</h2>
+<blockquote>
+<p>Cancel Subscription</p>
+</blockquote>
+<pre class="highlight php tab-php"><code>
+  cancelSubscription($subscr_id)
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+</code></pre><pre class="highlight html tab-html"><code></code></pre><h1 id='slate-examples'>Slate Examples</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight php tab-php"><code>require 'kittn'
 
-<p><code>Authorization: meowmeowmeow</code></p>
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get
+</code></pre><pre class="highlight html tab-html"><code>import kittn
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get()
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -327,20 +406,14 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight php tab-php"><code>require 'kittn'
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+</code></pre><pre class="highlight html tab-html"><code>import kittn
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get(2)
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -370,26 +443,15 @@ Remember — a happy kitten is an authenticated kitten!
 <td>The ID of the kitten to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight php tab-php"><code>require 'kittn'
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.delete(2)
+</code></pre><pre class="highlight html tab-html"><code>import kittn
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+api = kittn.authorize('meowmeowmeow')
+api.kittens.delete(2)
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -409,9 +471,71 @@ Remember — a happy kitten is an authenticated kitten!
 <td>The ID of the kitten to delete</td>
 </tr>
 </tbody></table>
+<h1 id='slate-examples-errors'>Slate Examples (Errors)</h1>
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified kitten could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="php">Force(php)</a>
+                <a href="#" data-language-name="html">External(html)</a>
+          </div>
       </div>
     </div>
   </body>
